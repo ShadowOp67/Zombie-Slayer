@@ -66,8 +66,22 @@ public class Projectile : MonoBehaviour {
 			Destroy (gameObject);
 		}
 
-		//If bullet collides with "Blood" tag
-		if (collision.transform.tag == "Blood") 
+        if (collision.transform.CompareTag("Zombie"))
+        {
+            Debug.Log("Вы попали в зомби");
+            Destroy(gameObject);
+
+            Health health = collision.transform.GetComponent<Health>();
+
+            if (health != null)
+            {
+                health.TakeDamage(25f);
+                Debug.Log("Вы попали в зомби и нанесли 25 урона");
+            }
+        }
+
+        //If bullet collides with "Blood" tag
+        if (collision.transform.tag == "Blood") 
 		{
 			//Instantiate random impact prefab from array
 			Instantiate (bloodImpactPrefabs [Random.Range 
