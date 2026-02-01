@@ -2,27 +2,33 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    public float maxHealth = 100f;
-    public float health;
+    public int maxHealth = 100;
+    public int currentHealth;
 
-    private void Start()
+    void Start()
     {
-        health = maxHealth;
+        currentHealth = maxHealth;
     }
 
-    public void TakeDamage(float damage)
+    void Update()
     {
-        health -= damage;
-
-        if (health <= 0)
+        if (currentHealth <= 0)
         {
             Die();
         }
     }
 
-    private void Die()
+    public void TakeDamage(int damage)
     {
-        Debug.Log(gameObject.name + " умер");
+        currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        Debug.Log(gameObject.name + " took damage: " + damage);
+    }
+
+    void Die()
+    {
+        Debug.Log(gameObject.name + " died");
         Destroy(gameObject);
     }
 }

@@ -68,15 +68,13 @@ public class Projectile : MonoBehaviour {
 
         if (collision.transform.CompareTag("Zombie"))
         {
-            Debug.Log("Вы попали в зомби");
             Destroy(gameObject);
 
             Health health = collision.transform.GetComponent<Health>();
 
             if (health != null)
             {
-                health.TakeDamage(25f);
-                Debug.Log("Вы попали в зомби и нанесли 25 урона");
+                health.TakeDamage(25);
             }
         }
 
